@@ -12,7 +12,7 @@ namespace ExamenFinalProgramaciónIKraven.Data
     internal class ConexionTiendita
     {
         //Cadena de conexion a la base de datos (La tiendita)
-        string connectionString = "Server=localhost;Database=db_universidad;Uid=root;Pwd=crocomodo";
+        string connectionString = "Server=localhost;Database=ExamenFinalYourgen;Uid=root;Pwd=crocomodo";
         private MySqlConnection connection;
 
         //Constructor para inicializar la conexion

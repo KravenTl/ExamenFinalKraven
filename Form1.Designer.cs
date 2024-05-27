@@ -50,9 +50,9 @@
             this.buttonPrueba = new System.Windows.Forms.Button();
             this.buttonCargar = new System.Windows.Forms.Button();
             this.buttonBuscar = new System.Windows.Forms.Button();
-            this.dataGridViewPrueba = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBoxCRUD.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPrueba)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelId
@@ -196,7 +196,7 @@
             // 
             this.buttonEliminar.Location = new System.Drawing.Point(411, 39);
             this.buttonEliminar.Name = "buttonEliminar";
-            this.buttonEliminar.Size = new System.Drawing.Size(75, 24);
+            this.buttonEliminar.Size = new System.Drawing.Size(75, 31);
             this.buttonEliminar.TabIndex = 21;
             this.buttonEliminar.Text = "Eliminar";
             this.buttonEliminar.UseVisualStyleBackColor = true;
@@ -205,7 +205,7 @@
             // 
             this.buttonActualizar.Location = new System.Drawing.Point(330, 39);
             this.buttonActualizar.Name = "buttonActualizar";
-            this.buttonActualizar.Size = new System.Drawing.Size(75, 24);
+            this.buttonActualizar.Size = new System.Drawing.Size(75, 31);
             this.buttonActualizar.TabIndex = 21;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
@@ -214,7 +214,7 @@
             // 
             this.buttonInsertar.Location = new System.Drawing.Point(249, 39);
             this.buttonInsertar.Name = "buttonInsertar";
-            this.buttonInsertar.Size = new System.Drawing.Size(75, 24);
+            this.buttonInsertar.Size = new System.Drawing.Size(75, 31);
             this.buttonInsertar.TabIndex = 20;
             this.buttonInsertar.Text = "Insertar";
             this.buttonInsertar.UseVisualStyleBackColor = true;
@@ -223,7 +223,7 @@
             // 
             this.buttonPrueba.Location = new System.Drawing.Point(6, 39);
             this.buttonPrueba.Name = "buttonPrueba";
-            this.buttonPrueba.Size = new System.Drawing.Size(75, 24);
+            this.buttonPrueba.Size = new System.Drawing.Size(75, 31);
             this.buttonPrueba.TabIndex = 19;
             this.buttonPrueba.Text = "Prueba";
             this.buttonPrueba.UseVisualStyleBackColor = true;
@@ -233,7 +233,7 @@
             // 
             this.buttonCargar.Location = new System.Drawing.Point(168, 39);
             this.buttonCargar.Name = "buttonCargar";
-            this.buttonCargar.Size = new System.Drawing.Size(75, 24);
+            this.buttonCargar.Size = new System.Drawing.Size(75, 31);
             this.buttonCargar.TabIndex = 18;
             this.buttonCargar.Text = "Cargar";
             this.buttonCargar.UseVisualStyleBackColor = true;
@@ -243,20 +243,20 @@
             // 
             this.buttonBuscar.Location = new System.Drawing.Point(87, 39);
             this.buttonBuscar.Name = "buttonBuscar";
-            this.buttonBuscar.Size = new System.Drawing.Size(75, 24);
+            this.buttonBuscar.Size = new System.Drawing.Size(75, 31);
             this.buttonBuscar.TabIndex = 0;
             this.buttonBuscar.Text = "Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewPrueba
+            // dataGridView1
             // 
-            this.dataGridViewPrueba.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewPrueba.Location = new System.Drawing.Point(455, 334);
-            this.dataGridViewPrueba.Name = "dataGridViewPrueba";
-            this.dataGridViewPrueba.RowHeadersWidth = 51;
-            this.dataGridViewPrueba.RowTemplate.Height = 24;
-            this.dataGridViewPrueba.Size = new System.Drawing.Size(741, 190);
-            this.dataGridViewPrueba.TabIndex = 16;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(455, 334);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(887, 190);
+            this.dataGridView1.TabIndex = 16;
             // 
             // Form1
             // 
@@ -264,7 +264,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1438, 536);
             this.Controls.Add(this.groupBoxCRUD);
-            this.Controls.Add(this.dataGridViewPrueba);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBoxNombre);
             this.Controls.Add(this.comboBoxMarca);
             this.Controls.Add(this.textBox1);
@@ -283,7 +283,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBoxCRUD.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPrueba)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -313,7 +313,7 @@
         private System.Windows.Forms.Button buttonPrueba;
         private System.Windows.Forms.Button buttonCargar;
         private System.Windows.Forms.Button buttonBuscar;
-        private System.Windows.Forms.DataGridView dataGridViewPrueba;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 
