@@ -187,14 +187,14 @@
             this.groupBoxCRUD.Controls.Add(this.buttonBuscar);
             this.groupBoxCRUD.Location = new System.Drawing.Point(455, 222);
             this.groupBoxCRUD.Name = "groupBoxCRUD";
-            this.groupBoxCRUD.Size = new System.Drawing.Size(494, 90);
+            this.groupBoxCRUD.Size = new System.Drawing.Size(533, 90);
             this.groupBoxCRUD.TabIndex = 17;
             this.groupBoxCRUD.TabStop = false;
             this.groupBoxCRUD.Text = "CRUD";
             // 
             // buttonEliminar
             // 
-            this.buttonEliminar.Location = new System.Drawing.Point(411, 39);
+            this.buttonEliminar.Location = new System.Drawing.Point(421, 39);
             this.buttonEliminar.Name = "buttonEliminar";
             this.buttonEliminar.Size = new System.Drawing.Size(75, 31);
             this.buttonEliminar.TabIndex = 21;
@@ -205,7 +205,7 @@
             // 
             this.buttonActualizar.Location = new System.Drawing.Point(330, 39);
             this.buttonActualizar.Name = "buttonActualizar";
-            this.buttonActualizar.Size = new System.Drawing.Size(75, 31);
+            this.buttonActualizar.Size = new System.Drawing.Size(85, 31);
             this.buttonActualizar.TabIndex = 21;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
@@ -247,6 +247,7 @@
             this.buttonBuscar.TabIndex = 0;
             this.buttonBuscar.Text = "Buscar";
             this.buttonBuscar.UseVisualStyleBackColor = true;
+            this.buttonBuscar.Click += new System.EventHandler(this.buttonBuscar_Click);
             // 
             // dataGridView1
             // 
