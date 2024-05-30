@@ -1,5 +1,6 @@
 ﻿using ExamenFinalProgramaciónIKraven.Data;
 using ExamenFinalProgramaciónIKraven.Data.Models;
+using ExamenFinalProgramaciónIKraven.Data.Models.Validacion_de_datos_CRUD;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +32,19 @@ namespace ExamenFinalProgramaciónIKraven
             
         }
 
+        //Metodo para limpiar TOODO
+        private void LimpiarTodo()
+        {
+            textBoxId.Clear();
+            textBoxNombre.Clear();
+            comboBoxNombre.SelectedIndex = -1;
+            textBoxMarca.Clear();
+            comboBoxMarca.SelectedIndex = -1;
+            textBoxCantidad.Clear();
+            textBoxPrecio.Clear();
+            checkBoxDisponibles.Checked= false;
+
+        }
 
         // Para cargar las marcas y nombres en los comboBox
         private void CargaralosComboBox()
@@ -91,7 +105,7 @@ namespace ExamenFinalProgramaciónIKraven
             {
                 prd.ID = int.Parse(textBoxId.Text);
                 dataGridView1.DataSource = producto.BuscarProducto(prd.ID);
-                textBoxId.Clear();
+                LimpiarTodo();
             }
             else if (!string.IsNullOrWhiteSpace(textBoxMarca.Text))//Si el texBox de la marca NO esta vacio o nulo
             {
@@ -122,10 +136,21 @@ namespace ExamenFinalProgramaciónIKraven
                 prd.Cantidad = int.Parse(textBoxCantidad.Text);
                 prd.Precio = decimal.Parse(textBoxPrecio.Text);
                 prd.Disponibles = checkBoxDisponibles.Checked;
-                producto.Insertar(prd);
-                MessageBox.Show("Se inserto correctamente el nuevo producto");
-                dataGridView1.DataSource = producto.LeerProductos();
+                //Para confirmar la accion
+                Insertar insertar = new Insertar();
+                DialogResult confirmar = insertar.ShowDialog();
 
+                if (confirmar == DialogResult.OK)// Si dice que si
+                { 
+
+                    producto.Insertar(prd);
+                    MessageBox.Show("Se inserto correctamente el nuevo producto");
+                    dataGridView1.DataSource = producto.LeerProductos();
+                    LimpiarTodo();
+                }else if(confirmar == DialogResult.Cancel)// Si dice que nel pastel
+                {
+                    MessageBox.Show("Pues no pues");
+                }
             }
             catch (Exception ex) 
             {
@@ -136,33 +161,69 @@ namespace ExamenFinalProgramaciónIKraven
         //Para Actualizar un producto
         private void buttonActualizar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(textBoxId.Text)) { 
-            prd.ID = int.Parse(textBoxId.Text);
-            prd.Nombre = textBoxNombre.Text;
-            prd.Marca = textBoxMarca.Text;
-            prd.Cantidad = int.Parse(textBoxCantidad.Text);
-            prd.Precio = decimal.Parse(textBoxPrecio.Text);
-            prd.Disponibles = checkBoxDisponibles.Checked;
-            producto.Actualizar(prd);
-            dataGridView1.DataSource = producto.LeerProductos();
-            MessageBox.Show("Se actualizo correctamente");
-            }
-            else
+            try
             {
-                MessageBox.Show("Ingrese la Id del Producto que desea actualizar");
+                if (!string.IsNullOrWhiteSpace(textBoxId.Text))
+                {
+                    //Para confirmar la accion
+                    Actualizar actualizar = new Actualizar();
+                    DialogResult confirmar=actualizar.ShowDialog();//Mostrara el formulario de actualizar
+
+                    if (confirmar == DialogResult.OK)// si dice que si 
+                    {
+                        prd.ID = int.Parse(textBoxId.Text);
+                        prd.Nombre = textBoxNombre.Text;
+                        prd.Marca = textBoxMarca.Text;
+                        prd.Cantidad = int.Parse(textBoxCantidad.Text);
+                        prd.Precio = decimal.Parse(textBoxPrecio.Text);
+                        prd.Disponibles = checkBoxDisponibles.Checked;
+                        producto.Actualizar(prd);
+                        dataGridView1.DataSource = producto.LeerProductos();
+                        MessageBox.Show("Se actualizo correctamente");
+                        LimpiarTodo();
+                    }else if(confirmar == DialogResult.Cancel)//Si dice que nel pastel
+                    {
+                        MessageBox.Show ("Pues no pues");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese la Id del Producto que desea actualizar");
+                }
+            }catch(Exception ex)
+            {
+                MessageBox.Show("No fue posible agregar el producto");
             }
         }
 
         private void buttonEliminar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(textBoxId.Text))
+            try
             {
-                prd.ID=int.Parse(textBoxId.Text);
-                producto.EliminarProducto(prd);
-                MessageBox.Show("Se elimino correctamente");
-            }else
+                if (!string.IsNullOrWhiteSpace(textBoxId.Text))
+                {
+                    //Para confirmar la accion
+                    Eliminar eliminar = new Eliminar();
+                    DialogResult confirmar = eliminar.ShowDialog();
+
+                    if (confirmar == DialogResult.OK)//Si dice que si
+                    {
+                        prd.ID = int.Parse(textBoxId.Text);
+                        producto.EliminarProducto(prd);
+                        MessageBox.Show("Se elimino correctamente");
+                        LimpiarTodo();
+                    }else if (confirmar == DialogResult.Cancel)//Si dice que nel pastel
+                    {
+                        MessageBox.Show("Pues no pues");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese la Id del producto que desea Eliminar");
+                }
+            }catch(Exception ex)
             {
-                MessageBox.Show("Ingrese la Id del producto que desea Eliminar");
+                MessageBox.Show("No fue posible eliminar");
             }
         }
     }
