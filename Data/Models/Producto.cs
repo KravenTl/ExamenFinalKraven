@@ -31,9 +31,5 @@ namespace ExamenFinalProgramaciónIKraven.Data.Models
             Precio = precio;
             Disponibles= disponibles;
         }
-
-
-
-
     }
 }

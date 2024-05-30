@@ -88,16 +88,22 @@ namespace ExamenFinalProgramaciónIKraven
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(textBoxId.Text))//Si el textBox de la id NO esta vacio o nulo  
-            { 
-            prd.ID = int.Parse(textBoxId.Text);
-            dataGridView1.DataSource = producto.BuscarProducto(prd.ID);
-            textBoxId.Clear();
+            {
+                prd.ID = int.Parse(textBoxId.Text);
+                dataGridView1.DataSource = producto.BuscarProducto(prd.ID);
+                textBoxId.Clear();
             }
             else if (!string.IsNullOrWhiteSpace(textBoxMarca.Text))//Si el texBox de la marca NO esta vacio o nulo
             {
-                string marca=textBoxMarca.Text; 
+                string marca = textBoxMarca.Text;
                 dataGridView1.DataSource = producto.BuscarProducto(marca);
                 textBoxMarca.Clear();
+            } else if (!string.IsNullOrWhiteSpace(textBoxNombre.Text))
+            {
+                string nombre= textBoxNombre.Text;
+                dataGridView1.DataSource=producto.BuscarProductoNombre(nombre);
+                textBoxNombre.Clear();
+
             }
             else
             {
@@ -108,13 +114,23 @@ namespace ExamenFinalProgramaciónIKraven
         //Paa insertar un nuevo producto
         private void buttonInsertar_Click(object sender, EventArgs e)
         {
-            prd.Nombre= textBoxNombre.Text;
-            prd.Marca = textBoxMarca.Text;
-            prd.Fecha_de_ingreso = DateTime.Now;
-            prd.Cantidad = int.Parse(textBoxCantidad.Text);
-            prd.Precio=decimal.Parse(textBoxPrecio.Text);
-            prd.Disponibles= checkBoxDisponibles.Checked;
-            producto.Insertar(prd);
+            try
+            {
+                prd.Nombre = textBoxNombre.Text;
+                prd.Marca = textBoxMarca.Text;
+                prd.Fecha_de_ingreso = DateTime.Now;
+                prd.Cantidad = int.Parse(textBoxCantidad.Text);
+                prd.Precio = decimal.Parse(textBoxPrecio.Text);
+                prd.Disponibles = checkBoxDisponibles.Checked;
+                producto.Insertar(prd);
+                MessageBox.Show("Se inserto correctamente el nuevo producto");
+                dataGridView1.DataSource = producto.LeerProductos();
+
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show("Eror al insertar "+ex.Message);
+            }
         }
 
         //Para Actualizar un producto

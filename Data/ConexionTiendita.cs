@@ -40,7 +40,6 @@ namespace ExamenFinalProgramaciónIKraven.Data
             }
         }
 
-
         //Metodo para leer los productos 
         public List<Producto> LeerProductos()
         {
@@ -104,7 +103,7 @@ namespace ExamenFinalProgramaciónIKraven.Data
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al leer los productos por Id" + ex.Message);
+                MessageBox.Show("Error al buscar por Id" + ex.Message);
             }
             finally
             {
@@ -144,6 +143,36 @@ namespace ExamenFinalProgramaciónIKraven.Data
             return productos;//Devolver el DataTable con los productos 
         }
 
+        //Metodo para buscar un producto por palabras clabe en el nombre
+        public DataTable BuscarProductoNombre(string palabra) 
+        {
+            DataTable productos = new DataTable();
+            try
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM Productos WHERE Nombre_del_producto like @palabra";
+                    using (MySqlCommand command = new MySqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@palabra", "%" + palabra + "%");
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(command))
+                        {
+                            adapter.Fill(productos); // Llenar el DataTable con los resultados de la consulta
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al buscar por palabra clave en el nombre" + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return productos;//Devolver el DataTable con los productos 
+        }
 
         //Metodo para insertar un producto
         public void Insertar(Producto producto)//Mando por parametros lo que quiero insertar en la tabla, trayendolo desde el constructor con parametros de la clase Producto
