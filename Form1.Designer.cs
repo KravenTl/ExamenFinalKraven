@@ -40,7 +40,7 @@
             this.textBoxNombre = new System.Windows.Forms.TextBox();
             this.textBoxMarca = new System.Windows.Forms.TextBox();
             this.textBoxCantidad = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxPrecio = new System.Windows.Forms.TextBox();
             this.comboBoxMarca = new System.Windows.Forms.ComboBox();
             this.comboBoxNombre = new System.Windows.Forms.ComboBox();
             this.groupBoxCRUD = new System.Windows.Forms.GroupBox();
@@ -154,12 +154,12 @@
             this.textBoxCantidad.Size = new System.Drawing.Size(250, 22);
             this.textBoxCantidad.TabIndex = 11;
             // 
-            // textBox1
+            // textBoxPrecio
             // 
-            this.textBox1.Location = new System.Drawing.Point(171, 194);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(250, 22);
-            this.textBox1.TabIndex = 12;
+            this.textBoxPrecio.Location = new System.Drawing.Point(171, 194);
+            this.textBoxPrecio.Name = "textBoxPrecio";
+            this.textBoxPrecio.Size = new System.Drawing.Size(250, 22);
+            this.textBoxPrecio.TabIndex = 12;
             // 
             // comboBoxMarca
             // 
@@ -200,6 +200,7 @@
             this.buttonEliminar.TabIndex = 21;
             this.buttonEliminar.Text = "Eliminar";
             this.buttonEliminar.UseVisualStyleBackColor = true;
+            this.buttonEliminar.Click += new System.EventHandler(this.buttonEliminar_Click);
             // 
             // buttonActualizar
             // 
@@ -209,6 +210,7 @@
             this.buttonActualizar.TabIndex = 21;
             this.buttonActualizar.Text = "Actualizar";
             this.buttonActualizar.UseVisualStyleBackColor = true;
+            this.buttonActualizar.Click += new System.EventHandler(this.buttonActualizar_Click);
             // 
             // buttonInsertar
             // 
@@ -218,6 +220,7 @@
             this.buttonInsertar.TabIndex = 20;
             this.buttonInsertar.Text = "Insertar";
             this.buttonInsertar.UseVisualStyleBackColor = true;
+            this.buttonInsertar.Click += new System.EventHandler(this.buttonInsertar_Click);
             // 
             // buttonPrueba
             // 
@@ -268,7 +271,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBoxNombre);
             this.Controls.Add(this.comboBoxMarca);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxPrecio);
             this.Controls.Add(this.textBoxCantidad);
             this.Controls.Add(this.textBoxMarca);
             this.Controls.Add(this.textBoxNombre);
@@ -304,7 +307,7 @@
         private System.Windows.Forms.TextBox textBoxNombre;
         private System.Windows.Forms.TextBox textBoxMarca;
         private System.Windows.Forms.TextBox textBoxCantidad;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxPrecio;
         private System.Windows.Forms.ComboBox comboBoxMarca;
         private System.Windows.Forms.ComboBox comboBoxNombre;
         private System.Windows.Forms.GroupBox groupBoxCRUD;

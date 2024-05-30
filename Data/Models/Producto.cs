@@ -9,7 +9,7 @@ namespace ExamenFinalProgramaciónIKraven.Data.Models
 {
     internal class Producto
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
         public string Nombre { get; set; }
         public string Marca { get; set; }
         public DateTime Fecha_de_ingreso { get; set; }
@@ -23,7 +23,7 @@ namespace ExamenFinalProgramaciónIKraven.Data.Models
         //Constructor de la clase prorductos con parametros
         public Producto(int id, string nombre, string marca, DateTime fechadeingreso, int cantidad, decimal precio, bool disponibles)
         {
-            Id = id;
+            ID = id;
             Nombre= nombre;
             Marca= marca;
             Fecha_de_ingreso= fechadeingreso;

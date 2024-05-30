@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -145,16 +146,16 @@ namespace ExamenFinalProgramaciónIKraven.Data
 
 
         //Metodo para insertar un producto
-        public void Insertar(Producto producto)//Mando por parametros lo que quiero insertar en la tabla
+        public void Insertar(Producto producto)//Mando por parametros lo que quiero insertar en la tabla, trayendolo desde el constructor con parametros de la clase Producto
         {
             try
             {
                 using (MySqlConnection connection = new MySqlConnection(connectionString))
                 {
-                    string query = "INSERT INTO productos (Nombre_del_producto, Marca, Fecha_de_ingreso,Cantidad,Precio,Disponibles) VALUES (@Nombre_del_producto, @Marca, @Fecha_de_ingreso, @Cantidad, @Precio, @Disponibles)";
+                    string query = "INSERT INTO Productos (Nombre_del_producto, Marca, Fecha_de_ingreso,Cantidad,Precio,Disponibles) VALUES (@Nombre_del_producto, @Marca, @Fecha_de_ingreso, @Cantidad, @Precio, @Disponibles)";
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
-                        cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                        cmd.Parameters.AddWithValue("@Nombre_del_producto", producto.Nombre);//Utilizo el constructor con parametros para asignar valores
                         cmd.Parameters.AddWithValue("@Marca", producto.Marca);
                         cmd.Parameters.AddWithValue("@Fecha_de_ingreso", producto.Fecha_de_ingreso);
                         cmd.Parameters.AddWithValue("@Cantidad", producto.Cantidad);
@@ -175,11 +176,59 @@ namespace ExamenFinalProgramaciónIKraven.Data
             }
         }
 
+        //Metodo para actualizar un produto
+        public void Actualizar(Producto producto)
+        {
+            try{
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    string query = "UPDATE productos SET Nombre_del_producto=@Nombre_del_producto, Marca=@Marca,Cantidad=@Cantidad,Precio=@Precio,Disponibles=@Disponibles WHERE ID=@Id";
+                    using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                    {
+                        cmd.Parameters.AddWithValue("@Id", producto.ID);//Utilizo el constructor con parametros para asignar valores
+                        cmd.Parameters.AddWithValue("@Nombre_del_producto", producto.Nombre);
+                        cmd.Parameters.AddWithValue("@Marca", producto.Marca);
+                        cmd.Parameters.AddWithValue("@Cantidad", producto.Cantidad);
+                        cmd.Parameters.AddWithValue("@Precio", producto.Precio);
+                        cmd.Parameters.AddWithValue("@Disponibles", producto.Disponibles);
+                        connection.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Error al acomodar las cosas en el congelador");
+            } 
+            finally
+            {
+                connection.Close();
+            }
+        }
 
+        //Metodo para eliminar un producto
+        public void EliminarProducto(Producto producto)
+        {
+            try { 
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
 
-
-
-
-
+                string sql = "DELETE FROM Productos WHERE ID = @Id";
+                using (MySqlCommand command = new MySqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", producto.ID);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }catch (Exception ex) 
+            {
+                MessageBox.Show("No se pudo tirar el producto a la basura");
+            }
+            finally 
+            {
+                connection.Close(); 
+            }
+        }
     }
 }
