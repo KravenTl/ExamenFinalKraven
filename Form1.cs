@@ -21,28 +21,47 @@ namespace ExamenFinalProgramaciónIKraven
 
         //Lista que contiene las marcas de la tiendita
         private List<string> marcasTiendita = new List<string> { "Toledo", "Pollo Rey" };
-
+        //Lista que contiene las marcas
+        private List<string> nombresProducto = new List<string> { "Salchicha Hot Dog 10 U","Salchicha Hot Dog 54 U","Tortitas de pollo 4u","Alitas Barbacoa 200g","Carne Prensada","Tortitas de carne 1518g"};
         public Form1()
         {
             InitializeComponent();
-            // Cargar las marcas en el combo box al iniciar el formulario
-            CargarMarcasEnComboBox();
+            // Cargar todo en los comboBox al iniciar el formulario
+            CargaralosComboBox();
+            
         }
 
 
-        //Para el combo box
-        private void CargarMarcasEnComboBox()
+        // Para cargar las marcas y nombres en los comboBox
+        private void CargaralosComboBox()
         {
-            comboBoxMarca.DataSource = marcasTiendita;//Le asignamos el valor de la lista 
+            comboBoxMarca.DataSource = marcasTiendita; // Le asignamos el valor de la lista de marcas
             comboBoxMarca.SelectedIndex = -1; // Para que no haya ninguna selección inicial
-            comboBoxMarca.SelectedIndexChanged += ComboBoxMarcas_SelectedIndexChanged;
+
+            comboBoxNombre.DataSource = nombresProducto; // Le asignamos el valor de la lista de nombres
+            comboBoxNombre.SelectedIndex = -1; // Para que no haya ninguna selección inicial
+
+            // Asignar el evento SelectedIndexChanged a ambos combo boxes
+            comboBoxMarca.SelectedIndexChanged += ComboBoxMarca_SelectedIndexChanged;
+            comboBoxNombre.SelectedIndexChanged += ComboBoxNombre_SelectedIndexChanged;
         }
 
-        //Para que al seleccionar algo en el comboBox lo seleccione al textBox
-        private void ComboBoxMarcas_SelectedIndexChanged(object sender, EventArgs e)
+        // Para que al seleccionar algo en el comboBoxMarca se actualice el textBoxMarca
+        private void ComboBoxMarca_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Asignar la marca seleccionada al TextBox
-            textBoxMarca.Text = comboBoxMarca.SelectedItem.ToString();
+            if (comboBoxMarca.SelectedIndex != -1)
+            {
+                textBoxMarca.Text = comboBoxMarca.SelectedItem.ToString();
+            }
+        }
+
+        // Para que al seleccionar algo en el comboBoxNombre se actualice el textBoxNombre
+        private void ComboBoxNombre_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxNombre.SelectedIndex != -1)
+            {
+                textBoxNombre.Text = comboBoxNombre.SelectedItem.ToString();
+            }
         }
         //Para probar la conexion
         private void buttonPrueba_Click(object sender, EventArgs e)
