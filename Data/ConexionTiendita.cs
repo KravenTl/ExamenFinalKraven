@@ -41,7 +41,7 @@ namespace ExamenFinalProgramaciónIKraven.Data
         }
 
         //Metodo para leer los productos 
-        public List<Producto> LeerProductos()
+        public List<Producto> LeerProductos()//Lista de tipo Producto para obtener todos los productos
         {
             List<Producto> productos = new List<Producto>();
 
@@ -55,9 +55,9 @@ namespace ExamenFinalProgramaciónIKraven.Data
                     connection.Open();
                     MySqlDataReader reader = cmd.ExecuteReader();
 
-                    while (reader.Read())
+                    while (reader.Read())//reader lee cada fila, seguira leyendo hasta que reader.Read sea falso o sea no haya mas filas 
                     {
-                        Producto producto = new Producto
+                        Producto producto = new Producto//Instancio y utilizo el constructor con parametros
                         (
                             id: reader.GetInt32("ID"),
                             nombre: reader.GetString("Nombre_del_Producto"),

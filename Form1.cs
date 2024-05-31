@@ -17,8 +17,8 @@ namespace ExamenFinalProgramaciónIKraven
     public partial class Form1 : Form
     {
         ConexionTiendita producto = new ConexionTiendita(); // Varible de instancia de la clase ConexionTiendita
-        Producto prd = new Producto();
-        List<Producto> inventario;
+        Producto prd = new Producto();//Variablde de instancia de la clase Producto
+        List<Producto> inventario;//Variable de tipo lista de Producto
 
         //Lista que contiene las marcas de la tiendita
         private List<string> marcasTiendita = new List<string> { "Toledo", "Pollo Rey" };
@@ -77,6 +77,7 @@ namespace ExamenFinalProgramaciónIKraven
                 textBoxNombre.Text = comboBoxNombre.SelectedItem.ToString();
             }
         }
+
         //Para probar la conexion
         private void buttonPrueba_Click(object sender, EventArgs e)
         {
@@ -94,38 +95,46 @@ namespace ExamenFinalProgramaciónIKraven
         //Para leer todos los datos de la tabla
         private void buttonCargar_Click(object sender, EventArgs e)
         {
-            inventario = producto.LeerProductos();
+            inventario = producto.LeerProductos();//Utilizo el constructor vacio
             dataGridView1.DataSource = inventario;
         }
 
-        //Para buscar por Id o Marca
+        //Para buscar por Id, Marca o palabra clave en el Nombre
         private void buttonBuscar_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(textBoxId.Text))//Si el textBox de la id NO esta vacio o nulo  
+            try
             {
-                prd.ID = int.Parse(textBoxId.Text);
-                dataGridView1.DataSource = producto.BuscarProducto(prd.ID);
-                LimpiarTodo();
-            }
-            else if (!string.IsNullOrWhiteSpace(textBoxMarca.Text))//Si el texBox de la marca NO esta vacio o nulo
-            {
-                string marca = textBoxMarca.Text;
-                dataGridView1.DataSource = producto.BuscarProducto(marca);
-                textBoxMarca.Clear();
-            } else if (!string.IsNullOrWhiteSpace(textBoxNombre.Text))
-            {
-                string nombre= textBoxNombre.Text;
-                dataGridView1.DataSource=producto.BuscarProductoNombre(nombre);
-                textBoxNombre.Clear();
+                if (!string.IsNullOrWhiteSpace(textBoxId.Text))//Si el textBox de la id NO esta vacio o nulo  
+                {
+                    prd.ID =int.Parse(textBoxId.Text);
+                    dataGridView1.DataSource = producto.BuscarProducto(prd.ID);
+                    LimpiarTodo();
+                }
+                else if (!string.IsNullOrWhiteSpace(textBoxMarca.Text))//Si el texBox de la marca NO esta vacio o nulo
+                {
+                    prd.Marca = textBoxMarca.Text;
+                    dataGridView1.DataSource = producto.BuscarProducto(prd.Marca);
+                    LimpiarTodo();
 
-            }
-            else
+                }
+                else if (!string.IsNullOrWhiteSpace(textBoxNombre.Text))
+                {
+                    prd.Nombre = textBoxNombre.Text;
+                    dataGridView1.DataSource = producto.BuscarProductoNombre(prd.Nombre);
+                    LimpiarTodo();
+
+                }
+                else
+                {
+                    MessageBox.Show("Por favor ingrese la Marca, Id o Nombre del producto que desea buscar");
+                }
+            }catch(Exception ex)
             {
-                MessageBox.Show("Por favor ingrese la Marca o Id del producto que desea buscar");
+                MessageBox.Show("Error al buscar " + ex);
             }
         }
 
-        //Paa insertar un nuevo producto
+        //Para insertar un nuevo producto
         private void buttonInsertar_Click(object sender, EventArgs e)
         {
             try
@@ -147,9 +156,11 @@ namespace ExamenFinalProgramaciónIKraven
                     MessageBox.Show("Se inserto correctamente el nuevo producto");
                     dataGridView1.DataSource = producto.LeerProductos();
                     LimpiarTodo();
+
                 }else if(confirmar == DialogResult.Cancel)// Si dice que nel pastel
                 {
                     MessageBox.Show("Pues no pues");
+                    LimpiarTodo();
                 }
             }
             catch (Exception ex) 
@@ -167,7 +178,7 @@ namespace ExamenFinalProgramaciónIKraven
                 {
                     //Para confirmar la accion
                     Actualizar actualizar = new Actualizar();
-                    DialogResult confirmar=actualizar.ShowDialog();//Mostrara el formulario de actualizar
+                    DialogResult confirmar= actualizar.ShowDialog();//Mostrara el formulario de actualizar
 
                     if (confirmar == DialogResult.OK)// si dice que si 
                     {
@@ -181,9 +192,11 @@ namespace ExamenFinalProgramaciónIKraven
                         dataGridView1.DataSource = producto.LeerProductos();
                         MessageBox.Show("Se actualizo correctamente");
                         LimpiarTodo();
+
                     }else if(confirmar == DialogResult.Cancel)//Si dice que nel pastel
                     {
                         MessageBox.Show ("Pues no pues");
+                        LimpiarTodo();
                     }
                 }
                 else
@@ -192,7 +205,7 @@ namespace ExamenFinalProgramaciónIKraven
                 }
             }catch(Exception ex)
             {
-                MessageBox.Show("No fue posible agregar el producto");
+                MessageBox.Show("No fue posible agregar el producto "+ex);
             }
         }
 
@@ -210,11 +223,14 @@ namespace ExamenFinalProgramaciónIKraven
                     {
                         prd.ID = int.Parse(textBoxId.Text);
                         producto.EliminarProducto(prd);
+                        dataGridView1.DataSource=producto.LeerProductos();
                         MessageBox.Show("Se elimino correctamente");
                         LimpiarTodo();
+
                     }else if (confirmar == DialogResult.Cancel)//Si dice que nel pastel
                     {
                         MessageBox.Show("Pues no pues");
+                        LimpiarTodo();
                     }
                 }
                 else
@@ -223,7 +239,7 @@ namespace ExamenFinalProgramaciónIKraven
                 }
             }catch(Exception ex)
             {
-                MessageBox.Show("No fue posible eliminar");
+                MessageBox.Show("No fue posible eliminar "+ex);
             }
         }
     }
